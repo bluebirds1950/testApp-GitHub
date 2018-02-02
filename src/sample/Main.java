@@ -25,7 +25,8 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        ImageReader.readImage("/home/hwaqar/Desktop/test.jpeg");
+        ImageReader imageReader = new ImageReader();
+        imageReader.readImage("/home/hwaqar/Desktop/test.jpeg");
         launch(args);
 
     }
