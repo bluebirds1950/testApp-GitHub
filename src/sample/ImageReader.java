@@ -9,6 +9,7 @@ import org.opencv.imgproc.Imgproc;
 public class ImageReader {
 
 
+
     public static void readImage(String path){
 
         System.out.println(System.getProperty("java.library.path"));
@@ -19,13 +20,5 @@ public class ImageReader {
         Image.copyTo(grayScaleImg);
 
         Imgproc.cvtColor(grayScaleImg,grayScaleImg,Imgproc.COLOR_BGR2GRAY);
-
-
-        //just checking following code
-        Mat circles = new Mat();
-        int minRadius = 10;
-        int maxRadius = 18;
-        Imgproc.HoughCircles(grayScaleImg, circles, Imgproc.CV_HOUGH_GRADIENT, 1, minRadius, 120, 10, minRadius, maxRadius);
-        System.out.println(circles);
     }
 }

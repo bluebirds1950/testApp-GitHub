@@ -28,8 +28,5 @@ public class Main extends Application {
         ImageReader.readImage("/home/hwaqar/Desktop/test.jpeg");
         launch(args);
 
-
-
-
     }
 }
