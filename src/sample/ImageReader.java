@@ -22,6 +22,7 @@ public class ImageReader {
 
         //reading image
         image = Imgcodecs.imread("src/sample/test_img/ecat-bubble-sheet.png");
+//        image = Imgcodecs.imread("src/sample/test_img/test.jpeg");
 
 
         // Check if image is loaded fine
@@ -35,23 +36,24 @@ public class ImageReader {
         image.copyTo(grayScaleImg);
         Imgproc.cvtColor(grayScaleImg, grayScaleImg, Imgproc.COLOR_BGR2GRAY);
 
-        //blurring image to remove noise
-        Imgproc.medianBlur(grayScaleImg, grayScaleImg, 5);
-
+        //blurring image to remove noise <results down,if blur >
+        Imgproc.medianBlur(grayScaleImg, grayScaleImg, 1);
+//        HighGui.imshow("test",grayScaleImg);
         Mat circles = new Mat();
+
         Imgproc.HoughCircles(grayScaleImg, circles, Imgproc.HOUGH_GRADIENT, 1.0,
-                (double)grayScaleImg.rows()/512, // change this value to detect circles with different distances to each other
-                100.0, 30.0, 1, 30); // change the last two parameters
+                (double)grayScaleImg.rows()/100, // change this value to detect circles with different distances to each other
+                100.0, 20.0, 10, 30); // change the last two parameters
         // (min_radius & max_radius) to detect larger circles
 
         for (int x = 0; x < circles.cols(); x++) {
             double[] c = circles.get(0, x);
             Point center = new Point(Math.round(c[0]), Math.round(c[1]));
             // circle center
-            Imgproc.circle(image, center, 1, new Scalar(0,100,100), 3, 8, 0 );
+            Imgproc.circle(image, center, 1, new Scalar(0,100,100), 1, 8, 0 );
             // circle outline
             int radius = (int) Math.round(c[2]);
-            Imgproc.circle(image, center, radius, new Scalar(255,0,255), 3, 8, 0 );
+            Imgproc.circle(image, center, radius, new Scalar(255,0,255), 2, 8, 0 );
         }
         HighGui.imshow("detected circles", image);
         HighGui.waitKey();
